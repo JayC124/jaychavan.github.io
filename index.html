@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -14,6 +15,8 @@
       margin: 0;
       display: flex;
       color: #333;
+      scroll-behavior: smooth;
+      transition: background-color 0.3s, color 0.3s;
     }
     .sidebar {
       background-color: #003366;
@@ -51,6 +54,7 @@
       display: block;
       transition: opacity 0.3s;
     }
+    .sidebar a.active { font-weight: bold; color: #FFD700; }
     .sidebar a:hover { opacity: 0.8; }
 
     .content {
@@ -67,22 +71,29 @@
       padding-bottom: 0.4rem;
       margin-bottom: 1rem;
     }
-    ul {
-      list-style-type: none;
-      padding-left: 0;
-    }
-    li {
-      margin-bottom: 0.6rem;
-    }
-    .highlight {
-      color: #003366;
-      font-weight: 600;
-    }
+    ul { list-style-type: none; padding-left: 0; }
+    li { margin-bottom: 0.6rem; }
+    .highlight { color: #003366; font-weight: 600; }
+
+    /* Skill Bars */
+    .skill { margin-bottom: 1rem; }
+    .bar { background: #eee; border-radius: 25px; overflow: hidden; height: 12px; }
+    .bar div { background: #003366; height: 100%; width: 0; animation: fill 2s forwards; }
+    @keyframes fill { to { width: var(--percent); } }
+
+    /* Card styles */
+    .card { background: white; padding: 1rem; margin-bottom: 1rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    .card:hover { transform: translateY(-5px); }
+
+    /* Dark Mode */
+    body.dark { background-color: #1c1c1c; color: #fff; }
+    body.dark .sidebar { background-color: #111; }
+    body.dark .card { background-color: #222; box-shadow: 0 4px 6px rgba(255,255,255,0.1); }
   </style>
 </head>
 <body>
   <aside class="sidebar">
-    <img src="jay_chavan.jpeg" alt="Jay Chavan">
+    <img src="profile.jpg" alt="Jay Chavan">
     <h1>Jay Chavan</h1>
     <p>Aspiring Political Leader<br>Public Policy Researcher</p>
     <a href="#about">About</a>
@@ -90,29 +101,49 @@
     <a href="#writing">Writing</a>
     <a href="#education">Education</a>
     <a href="#contact">Contact</a>
+    <button id="toggle-theme" style="margin-top:1rem; padding:0.5rem 1rem; cursor:pointer;">Toggle Dark Mode</button>
   </aside>
 
   <main class="content">
     <section id="about">
       <h2>About Me</h2>
       <p>I'm passionate about using policy to drive systemic change. My interests lie in criminal justice reform, education equity, and civic engagement. I’ve built projects that highlight wrongful convictions, promote bipartisan dialogue, and empower underrepresented voices.</p>
+      <div class="skill">
+        <p>Research</p>
+        <div class="bar" style="--percent:90%;"><div></div></div>
+      </div>
+      <div class="skill">
+        <p>Advocacy</p>
+        <div class="bar" style="--percent:85%;"><div></div></div>
+      </div>
+      <div class="skill">
+        <p>Writing</p>
+        <div class="bar" style="--percent:80%;"><div></div></div>
+      </div>
     </section>
 
     <section id="projects">
       <h2>Projects & Initiatives</h2>
-      <ul>
-        <li><span class="highlight">Voices Unchained</span> — Founder of a youth-led nonprofit addressing systemic racism through education, advocacy, and community engagement.</li>
-        <li><span class="highlight">Wrongful Convictions Awareness</span> — Instagram campaign bringing attention to wrongful convictions and judicial reform.</li>
-        <li><span class="highlight">C-SPAN StudentCam Documentary (2025)</span> — “What It Means to Be an American,” exploring immigration and identity through policy perspectives.</li>
-      </ul>
+      <div class="card">
+        <h3>Voices Unchained</h3>
+        <p>Founder of a youth-led nonprofit addressing systemic racism through education, advocacy, and community engagement.</p>
+      </div>
+      <div class="card">
+        <h3>Wrongful Convictions Awareness</h3>
+        <p>Instagram campaign bringing attention to wrongful convictions and judicial reform.</p>
+      </div>
+      <div class="card">
+        <h3>C-SPAN StudentCam Documentary (2025)</h3>
+        <p>“What It Means to Be an American,” exploring immigration and identity through policy perspectives.</p>
+      </div>
     </section>
 
     <section id="writing">
       <h2>Writing & Research</h2>
       <ul>
-        <li>“The Impact of Ranked Choice Voting on Senior Voters” — Independent research project (2024).</li>
-        <li>“Annexing Greenland: The Global Implications of U.S. Expansion” — Policy analysis essay (2025).</li>
-        <li>Harvard International Review Contest Submission — Essay on international governance and public health (2024).</li>
+        <li>“The Impact of Ranked Choice Voting on Senior Voters” — Independent research project (2024)</li>
+        <li>“Annexing Greenland: The Global Implications of U.S. Expansion” — Policy analysis essay (2025)</li>
+        <li>Harvard International Review Contest Submission — Essay on international governance and public health (2024)</li>
       </ul>
     </section>
 
@@ -128,10 +159,31 @@
     <section id="contact">
       <h2>Contact</h2>
       <p>📧 jay.chavan@example.com<br>
-      🔗 <a href="https://linkedin.com/in/jaychavan" target="_blank">LinkedIn</a> | <a href="https://github.com/jaychavan" target="_blank">GitHub</a> | <a href="https://voicesunchained.org" target="_blank">Voices Unchained</a></p>
+      🔗 <a href="https://linkedin.com/in/jaychavan" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> | <a href="https://github.com/jaychavan" target="_blank"><i class="fab fa-github"></i> GitHub</a> | <a href="https://voicesunchained.org" target="_blank"><i class="fas fa-globe"></i> Voices Unchained</a></p>
     </section>
 
     <p><em>“Policy is not about partisanship — it’s about people.”</em></p>
   </main>
+
+  <script>
+    // Dark Mode Toggle
+    document.getElementById('toggle-theme').addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+    });
+
+    // Sidebar active link highlighting
+    const links = document.querySelectorAll('.sidebar a');
+    window.addEventListener('scroll', () => {
+      let fromTop = window.scrollY + 100;
+      links.forEach(link => {
+        let section = document.querySelector(link.hash);
+        if(section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
